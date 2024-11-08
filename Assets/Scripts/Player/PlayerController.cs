@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
     private Animator animator;
+    private Coroutine coroutine;
     
     private void Awake()
     {
@@ -39,6 +40,28 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             PlayerManager.Instance.Player.clickEvent?.Invoke();
+        }
+    }
+    
+    public void AutoAttack()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+        else
+        {
+            coroutine = StartCoroutine(AutoClick());
+        }
+    }
+    
+    IEnumerator AutoClick()
+    {
+        while (true)
+        {
+            PlayerManager.Instance.Player.clickEvent?.Invoke();
+            yield return new WaitForSeconds(1);
         }
     }
 }

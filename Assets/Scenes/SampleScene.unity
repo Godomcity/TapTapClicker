@@ -991,7 +991,6 @@ GameObject:
   - component: {fileID: 2092302366}
   - component: {fileID: 2092302365}
   - component: {fileID: 2092302364}
-  - component: {fileID: 2092302367}
   m_Layer: 5
   m_Name: AutoClickButton
   m_TagString: Untagged
@@ -1063,9 +1062,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2092302367}
-        m_TargetAssemblyTypeName: AutoButton, Assembly-CSharp
-        m_MethodName: AutoClickButton
+      - m_Target: {fileID: 1953204596}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: AutoAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1113,18 +1112,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092302362}
   m_CullTransparentMesh: 1
---- !u!114 &2092302367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092302362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2076516d43790d48bb8e6845c55e85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
