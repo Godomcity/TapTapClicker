@@ -40,5 +40,4 @@ public class PlayerController : MonoBehaviour
             clickEvent?.Invoke();
         }
     }
-    
 }
