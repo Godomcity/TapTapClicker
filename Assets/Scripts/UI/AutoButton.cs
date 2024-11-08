@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class AutoButton : MonoBehaviour
 {
-    private bool isAutoClick = false;
     private Coroutine coroutine;
     
     public void AutoClickButton()
     {
-        isAutoClick = !isAutoClick;
-       
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
