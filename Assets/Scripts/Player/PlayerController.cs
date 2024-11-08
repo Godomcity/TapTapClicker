@@ -8,11 +8,13 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rigidBody;
+    private Rigidbody2D rigidBody;
+    private Animator animator;
     
     private void Awake()
     {
-        rigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -25,6 +27,7 @@ public class PlayerController : MonoBehaviour
        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
        Debug.Log("클릭클릭");
+       animator.SetTrigger("Attack");
        if (hit)
        {
            //TODO: 추후 애니메이션과 특정 행동 추가 예정
