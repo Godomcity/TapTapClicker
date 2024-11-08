@@ -23,9 +23,7 @@ public class AutoButton : MonoBehaviour
     {
         while (true)
         {
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-            Debug.Log("클릭클릭");
+            PlayerManager.Instance.Player.clickEvent?.Invoke();
             yield return new WaitForSeconds(1);
         }
     }

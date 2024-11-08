@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
-
+    
     public static PlayerManager Instance
     {
         get

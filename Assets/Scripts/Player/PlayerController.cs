@@ -9,8 +9,6 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidBody;
-
-    private Action clickEvent;
     
     private void Awake()
     {
@@ -19,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        clickEvent += Attack;
+        PlayerManager.Instance.Player.clickEvent += Attack;
     }
 
     void Attack()
@@ -37,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            clickEvent?.Invoke();
+            PlayerManager.Instance.Player.clickEvent?.Invoke();
         }
     }
 }
