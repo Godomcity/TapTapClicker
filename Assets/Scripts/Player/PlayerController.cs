@@ -11,7 +11,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
     private Coroutine coroutine;
-    
+
+    int damage = 1;
+
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -25,14 +28,17 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-       Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-       RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-       Debug.Log("클릭클릭");
-       animator.SetTrigger("Attack");
-       if (hit)
-       {
-           //TODO: 추후 애니메이션과 특정 행동 추가 예정
-       }
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+        Debug.Log("클릭클릭");
+        animator.SetTrigger("Attack");
+        GameManager.Instance.Monster.monsterController.TakeDamage(damage);
+
+        if (hit)
+        {
+            //TODO: 추후 애니메이션과 특정 행동 추가 예정
+            
+        }
     }
 
     public void OnClick(InputAction.CallbackContext context)
