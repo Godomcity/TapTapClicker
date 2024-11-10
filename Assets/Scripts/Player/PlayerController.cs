@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.Instance.Player.clickEvent += Attack;
+        GameManager.Instance.Player.clickEvent += Attack;
     }
 
     void Attack()
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            PlayerManager.Instance.Player.clickEvent?.Invoke();
+            GameManager.Instance.Player.clickEvent?.Invoke();
         }
     }
 }

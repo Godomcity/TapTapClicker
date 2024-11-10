@@ -1,31 +1,42 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerManager : MonoBehaviour
+public interface IDamgeable
 {
-    private static PlayerManager instance;
-    
-    public static PlayerManager Instance
+    void TakeDamage(int damage);
+}
+
+public class GameManager : MonoBehaviour
+{
+    private static GameManager instance;
+
+    public static GameManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new GameObject("PlayerManager").AddComponent<PlayerManager>();
+                instance = new GameObject("GameManager").AddComponent<GameManager>();
             }
             return instance;
         }
     }
 
     private Player player;
-    
+
     public Player Player
     {
         get { return player; }
         set { player = value; }
+    }
+
+    private Monster monster;
+
+    public Monster Monster
+    {
+        get { return monster; }
+        set {  monster = value; }
     }
 
     private void Awake()

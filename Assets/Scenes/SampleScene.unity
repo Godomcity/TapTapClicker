@@ -700,8 +700,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1921858739}
+  - component: {fileID: 1921858740}
   m_Layer: 0
-  m_Name: Monster_Goblin
+  m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -723,6 +724,18 @@ Transform:
   - {fileID: 1307584917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1921858740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921858738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116b9b7b8d425b4586296d8de0d6886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1950492489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,7 +1058,6 @@ GameObject:
   - component: {fileID: 2092302366}
   - component: {fileID: 2092302365}
   - component: {fileID: 2092302364}
-  - component: {fileID: 2092302367}
   m_Layer: 5
   m_Name: AutoClickButton
   m_TagString: Untagged
@@ -1117,9 +1129,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2092302367}
+      - m_Target: {fileID: 1953204590}
         m_TargetAssemblyTypeName: AutoButton, Assembly-CSharp
-        m_MethodName: AutoClickButton
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1167,18 +1179,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092302362}
   m_CullTransparentMesh: 1
---- !u!114 &2092302367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092302362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2076516d43790d48bb8e6845c55e85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5282865661524451737
 PrefabInstance:
   m_ObjectHideFlags: 0

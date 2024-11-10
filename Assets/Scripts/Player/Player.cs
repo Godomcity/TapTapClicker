@@ -12,6 +12,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         controller = GetComponent<PlayerController>(); 
-        PlayerManager.Instance.Player = this;
+        GameManager.Instance.Player = this;
     }
 }
