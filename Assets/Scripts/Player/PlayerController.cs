@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         while (true)
         {
-            PlayerManager.Instance.Player.clickEvent?.Invoke();
+            GameManager.Instance.Player.clickEvent?.Invoke();
             yield return new WaitForSeconds(1);
         }
     }

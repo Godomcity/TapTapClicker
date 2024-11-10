@@ -1129,9 +1129,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1953204590}
-        m_TargetAssemblyTypeName: AutoButton, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1953204596}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: AutoAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
