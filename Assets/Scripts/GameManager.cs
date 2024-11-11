@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public interface IDamgeable
 
 public class GameManager : MonoBehaviour
 {
+    public Action deathMonster;
+
     private static GameManager instance;
 
     public static GameManager Instance

@@ -9,4 +9,5 @@ public class MonsterData : ScriptableObject
     [Header("MonsterInfo")]
     public int health;
     public GameObject monsterPrefabs;
+    public int getGold;
 }

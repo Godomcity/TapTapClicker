@@ -6,7 +6,7 @@ public class MonsterController : MonoBehaviour, IDamgeable
 {
     private MonsterData data;
     Animator animator;
-    private int health;
+    int health;
 
     private void Awake()
     {
@@ -22,17 +22,24 @@ public class MonsterController : MonoBehaviour, IDamgeable
     public void TakeDamage(int damage)
     {
         health -= damage;
-        Debug.Log(health);
-        if (data.health <= 0)
+        animator.SetTrigger("Hit");
+        if (health == 0)
         {
             Die();
-            Debug.Log("¸ó½ºÅÍ°¡ Á×¾ú´Ù.");
-            Debug.Log("°ñµå¸¦ È¹µæÇß´Ù");
         }
     }
 
     void Die()
     {
+        StartCoroutine(DeathAnimation());
+    }
 
+    IEnumerator DeathAnimation()
+    {
+        animator.SetTrigger("Death");
+        GameManager.Instance.Stage.gold += data.getGold;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
+        GameManager.Instance.deathMonster?.Invoke();
     }
 }

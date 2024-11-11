@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class StageManager : MonoBehaviour
@@ -10,19 +13,34 @@ public class StageManager : MonoBehaviour
     private int curentMonsterNumber;
     private int maxMonsterNumber = 10;
     private int stage = 1;
+    public int gold;
+
+    [SerializeField] TextMeshProUGUI stageText;
+    [SerializeField] TextMeshProUGUI monsterNumberText;
+    [SerializeField] TextMeshProUGUI goldText;
 
     private void Awake()
     {
         GameManager.Instance.Stage = this;
+        GameManager.Instance.deathMonster += AddMonsterNumber;
     }
 
     private void Start()
+    {
+        MonsterSpawn();
+        stageText.text = $"Stage : {stage.ToString()}";
+        monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
+        goldText.text = $"Gold : {gold.ToString()}";
+    }
+
+    void MonsterSpawn()
     {
         int rndMonsterIndex = Random.Range(0, monsters.Length);
         monsterData = monsters[rndMonsterIndex];
         rndMonster = monsters[rndMonsterIndex].monsterPrefabs;
 
-        Instantiate(rndMonster, GameManager.Instance.Monster.transform);
+        GameObject go = Instantiate(rndMonster, GameManager.Instance.Monster.transform);
+        GameManager.Instance.Monster.monsterController = go.GetComponent<MonsterController>();
     }
 
     void Init()
@@ -32,6 +50,28 @@ public class StageManager : MonoBehaviour
         foreach (MonsterData monster in monsters)
         {
             monster.health *= stage;
+            monster.getGold *= stage;
+        }
+    }
+
+    void AddMonsterNumber()
+    {
+        if(curentMonsterNumber <= maxMonsterNumber - 1)
+        {
+            GameManager.Instance.Monster.monsterController = null;
+            curentMonsterNumber++;
+            monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
+            goldText.text = $"Gold : {gold.ToString()}";
+            MonsterSpawn();
+        }
+        else
+        {
+            stage++;
+            stageText.text = $"Stage : {stage.ToString()}";
+            MonsterSpawn();
+            Init();
+            goldText.text = $"Gold : {gold.ToString()}";
+            monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
         }
     }
 }
