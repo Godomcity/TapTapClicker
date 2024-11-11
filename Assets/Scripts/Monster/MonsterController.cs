@@ -23,7 +23,7 @@ public class MonsterController : MonoBehaviour, IDamgeable
     {
         health -= damage;
         animator.SetTrigger("Hit");
-        if (health == 0)
+        if (health <= 0)
         {
             Die();
         }

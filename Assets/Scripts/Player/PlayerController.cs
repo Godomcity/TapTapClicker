@@ -12,7 +12,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Coroutine coroutine;
 
-    int damage = 1;
+    public float autoClickTime = 1;
+    public int damage = 1;
+    public float critical = 0;
 
 
     private void Awake()
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
         while (true)
         {
             GameManager.Instance.Player.clickEvent?.Invoke();
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(autoClickTime);
         }
     }
 }

@@ -13,7 +13,7 @@ public class StageManager : MonoBehaviour
     private int curentMonsterNumber;
     private int maxMonsterNumber = 10;
     private int stage = 1;
-    public int gold;
+    public int gold = 500;
 
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] TextMeshProUGUI monsterNumberText;
@@ -23,6 +23,7 @@ public class StageManager : MonoBehaviour
     {
         GameManager.Instance.Stage = this;
         GameManager.Instance.deathMonster += AddMonsterNumber;
+        GameManager.Instance.useGold += UpdateGold;
     }
 
     private void Start()
@@ -30,7 +31,7 @@ public class StageManager : MonoBehaviour
         MonsterSpawn();
         stageText.text = $"Stage : {stage.ToString()}";
         monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
-        goldText.text = $"Gold : {gold.ToString()}";
+        goldText.text = $"Gold : {gold.ToString()}G";
     }
 
     void MonsterSpawn()
@@ -73,5 +74,10 @@ public class StageManager : MonoBehaviour
             goldText.text = $"Gold : {gold.ToString()}";
             monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
         }
+    }
+
+    void UpdateGold()
+    {
+        goldText.text = $"Gold : {gold.ToString()}G";
     }
 }

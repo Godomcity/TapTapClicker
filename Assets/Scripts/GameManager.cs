@@ -11,6 +11,7 @@ public interface IDamgeable
 public class GameManager : MonoBehaviour
 {
     public Action deathMonster;
+    public Action useGold;
 
     private static GameManager instance;
 
