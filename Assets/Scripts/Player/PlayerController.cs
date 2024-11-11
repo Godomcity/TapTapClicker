@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Coroutine coroutine;
 
+    public LayerMask layerMask;
+
     public float autoClickTime = 1;
     public int damage = 1;
     public float critical = 0;
@@ -30,16 +32,16 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        Debug.Log("클릭클릭");
-        animator.SetTrigger("Attack");
-        GameManager.Instance.Monster.monsterController.TakeDamage(damage);
+        Vector3 mousePosition = Input.mousePosition;
 
-        if (hit)
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePosition.x, mousePosition.y, 10f));
+       
+        if (Physics2D.Raycast(mousePos, Vector2.zero, 0f, layerMask))
         {
             //TODO: 추후 애니메이션과 특정 행동 추가 예정
-            
+            Debug.Log("클릭클릭");
+            animator.SetTrigger("Attack");
+            GameManager.Instance.Monster.monsterController.TakeDamage(damage);
         }
     }
 
