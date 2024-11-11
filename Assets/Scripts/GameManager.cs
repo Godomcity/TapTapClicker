@@ -39,6 +39,15 @@ public class GameManager : MonoBehaviour
         set {  monster = value; }
     }
 
+    private StageManager stage;
+
+    public StageManager Stage
+    { 
+        get { return stage; } 
+        set { stage = value; } 
+    }
+
+
     private void Awake()
     {
         if (instance == null)

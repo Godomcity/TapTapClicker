@@ -585,6 +585,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401210973}
   m_CullTransparentMesh: 1
+--- !u!1 &1727758347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727758349}
+  - component: {fileID: 1727758348}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1727758348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727758347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a134a755c841a584dba9bc26c351e1ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsters:
+  - {fileID: 11400000, guid: 2b59fd34bcf5df24194b9df9247e3617, type: 2}
+--- !u!4 &1727758349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727758347}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 3.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1921858738
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,7 +641,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1921858739}
   - component: {fileID: 1921858740}
-  - component: {fileID: 1921858741}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -630,20 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b116b9b7b8d425b4586296d8de0d6886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpawner: {fileID: 0}
---- !u!114 &1921858741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921858738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 538875f67d9896d42b83d42406bec174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 2b59fd34bcf5df24194b9df9247e3617, type: 2}
+  monsterController: {fileID: 0}
 --- !u!1 &1950492489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,3 +1243,4 @@ SceneRoots:
   - {fileID: 1950492492}
   - {fileID: 5282865661524451737}
   - {fileID: 1921858739}
+  - {fileID: 1727758349}
