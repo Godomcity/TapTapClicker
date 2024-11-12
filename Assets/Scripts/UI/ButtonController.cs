@@ -13,15 +13,14 @@ public class ButtonController : MonoBehaviour
     [SerializeField] TextMeshProUGUI criticalText;
     [SerializeField] TextMeshProUGUI autoClickTimeText;
 
-    private int attackUpgrade = 50;
-    private int criticalUpgrade = 50;
-    private int autoClickUpgrade = 50;
-
-    private float test = 0.1f;
+    public int attackUpgrade = 50;
+    public int criticalUpgrade = 50;
+    public int autoClickUpgrade = 50;
 
     private void Start()
     {
         UpdateText();
+        GameManager.Instance.ButtonController = this;
     }
 
     public void AttackButton()
@@ -31,7 +30,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Stage.gold -= attackUpgrade;
             GameManager.Instance.Player.controller.damage *= 2;
             attackUpgrade *= 2;
-            AttackUpdateText();
+            AttackUpdateText(attackUpgrade, GameManager.Instance.Player.controller.damage);
             SaveGame();
             // TODO : 구매 완료 팝업
         }
@@ -48,7 +47,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Stage.gold -= criticalUpgrade;
             GameManager.Instance.Player.controller.critical += 0.1f;
             criticalUpgrade *= 4;
-            CriticalUpdateText();
+            CriticalUpdateText(criticalUpgrade, GameManager.Instance.Player.controller.critical);
             SaveGame();
             // TODO : 구매 완료 팝업
         }
@@ -65,7 +64,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Stage.gold -= autoClickUpgrade;
             GameManager.Instance.Player.controller.autoClickTime -= 0.1f;
             autoClickUpgrade *= 3;
-            AutoClickUpdateText();
+            AutoClickUpdateText(autoClickUpgrade, GameManager.Instance.Player.controller.autoClickTime);
             SaveGame();
             // TODO : 구매 완료 팝업
         }
@@ -77,36 +76,37 @@ public class ButtonController : MonoBehaviour
 
     void UpdateText()
     {
-        AttackUpdateText();
-        CriticalUpdateText();
-        AutoClickUpdateText();
+        AttackUpdateText(attackUpgrade, GameManager.Instance.Player.controller.damage);
+        CriticalUpdateText(criticalUpgrade, GameManager.Instance.Player.controller.critical);
+        AutoClickUpdateText(autoClickUpgrade, GameManager.Instance.Player.controller.autoClickTime);
     }
 
-    void AttackUpdateText()
+    public void AttackUpdateText(int attackGold, int damage)
     {
-        attackButtonText.text = $"{attackUpgrade}G";
-        attackText.text = $"Damage : {GameManager.Instance.Player.controller.damage} → {GameManager.Instance.Player.controller.damage * 2}";
+        attackButtonText.text = $"{attackGold}G";
+        attackText.text = $"Damage : {damage} → {damage * 2}";
         GameManager.Instance.useGold?.Invoke();
     }
 
-    void CriticalUpdateText()
+    public void CriticalUpdateText(int criticalGold, float critical)
     {
-        criticalButtonText.text = $"{criticalUpgrade}G";
-        criticalText.text = $"Critical : {GameManager.Instance.Player.controller.critical}% → {GameManager.Instance.Player.controller.critical + 0.1f}%";
+        criticalButtonText.text = $"{criticalGold}G";
+        criticalText.text = $"Critical : {critical}% → {critical + 0.1f}%";
         GameManager.Instance.useGold?.Invoke();
     }
 
-    void AutoClickUpdateText()
+    public void AutoClickUpdateText(int autoClickGold, float autoClickTime)
     {
-        float autotTime = GameManager.Instance.Player.controller.autoClickTime - 0.1f;
-        autoClickTimeButtonText.text = $"{autoClickUpgrade}G";
-        autoClickTimeText.text = $"AutoClickTime : {GameManager.Instance.Player.controller.autoClickTime.ToString("N1")}s → {autotTime.ToString("N1")}s";
+        float autotTime = autoClickTime - 0.1f;
+        autoClickTimeButtonText.text = $"{autoClickGold}G";
+        autoClickTimeText.text = $"AutoClickTime : {autoClickTime.ToString("N1")}s → {autotTime.ToString("N1")}s";
         GameManager.Instance.useGold?.Invoke();
     }
 
     void SaveGame()
     {
-        SaveLoadManager.Instance.UpdateGameData(GameManager.Instance.Stage.curentMonsterNumber, GameManager.Instance.Stage.stage, GameManager.Instance.Stage.gold, GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
+        SaveLoadManager.Instance.PlayerGameData(GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
+        SaveLoadManager.Instance.ShopGameData(attackUpgrade, criticalUpgrade, autoClickUpgrade);
         SaveLoadManager.Instance.SaveAsJson();
     }
 }

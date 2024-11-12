@@ -17,6 +17,10 @@ public class GameData
     public int damage;
     public float critical;
 
+    public int attackUpgrade = 50;
+    public int criticalUpgrade = 50;
+    public int autoClickUpgrade = 50;
+
     public GameData()
     {
         curentMonsterNumber = 0;
@@ -25,6 +29,9 @@ public class GameData
         autoClickTime = 1;
         damage = 1;
         critical = 0;
+        attackUpgrade = 50;
+        criticalUpgrade = 50;
+        autoClickUpgrade = 50;
     }
 
 }
@@ -93,11 +100,37 @@ public class SaveLoadManager : MonoBehaviour
         return new GameData();
     }
 
-    public void UpdateGameData(int cutMonsterNum, int stageNum, int goldNum, float autoClickNum, int damageNum, float criticalNum)
+    public void ShopGameData(int attackGold,int criticalGold,int autoClickGold)
+    {
+        gameData.attackUpgrade = attackGold;
+        gameData.criticalUpgrade = criticalGold;
+        gameData.autoClickUpgrade = autoClickGold;
+    }
+
+    public void PlayerGameData(float autoClickNum, int damageNum, float criticalNum)
     {
         gameData.damage = damageNum;
         gameData.critical = criticalNum;
         gameData.autoClickTime = autoClickNum;
+    }
+
+    public void StageGameData(int cutMonsterNum, int stageNum, int goldNum)
+    {
+        gameData.curentMonsterNumber = cutMonsterNum;
+        gameData.stage = stageNum;
+        gameData.gold = goldNum;
+    }
+
+    public void UpdateGameData(int attackGold, int criticalGold, int autoClickGold, float autoClickNum, int damageNum, float criticalNum, int cutMonsterNum, int stageNum, int goldNum)
+    {
+        gameData.attackUpgrade = attackGold;
+        gameData.criticalUpgrade = criticalGold;
+        gameData.autoClickUpgrade = autoClickGold;
+
+        gameData.damage = damageNum;
+        gameData.critical = criticalNum;
+        gameData.autoClickTime = autoClickNum;
+
         gameData.curentMonsterNumber = cutMonsterNum;
         gameData.stage = stageNum;
         gameData.gold = goldNum;

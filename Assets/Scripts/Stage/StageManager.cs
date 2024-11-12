@@ -30,9 +30,6 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         MonsterSpawn();
-        stageText.text = $"Stage : {stage.ToString()}";
-        monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
-        goldText.text = $"Gold : {gold.ToString()}G";
     }
 
     void MonsterSpawn()
@@ -85,8 +82,14 @@ public class StageManager : MonoBehaviour
 
     void SaveGame()
     {
-        SaveLoadManager.Instance.UpdateGameData(curentMonsterNumber, stage, gold, GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
+        SaveLoadManager.Instance.StageGameData(curentMonsterNumber, stage, gold);
         SaveLoadManager.Instance.SaveAsJson();
     }
 
+    public void UpdateUI(int stageNum, int monsterNum, int goldNum)
+    {
+        stageText.text = $"Stage : {stageNum.ToString()}";
+        monsterNumberText.text = $"{monsterNum} / {maxMonsterNumber}";
+        goldText.text = $"Gold : {goldNum.ToString()}G";
+    }
 }

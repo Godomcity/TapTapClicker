@@ -51,6 +51,14 @@ public class GameManager : MonoBehaviour
         set { stage = value; } 
     }
 
+    private ButtonController btnController;
+
+    public ButtonController ButtonController
+    {
+        get { return btnController; }
+        set { btnController = value; }
+    }
+
 
     private void Awake()
     {
@@ -90,6 +98,17 @@ public class GameManager : MonoBehaviour
                 stage.gold = gameData.gold;
                 stage.stage = gameData.stage;
             }
+            else if(btnController != null)
+            {
+                btnController.attackUpgrade = gameData.attackUpgrade;
+                btnController.criticalUpgrade = gameData.criticalUpgrade;
+                btnController.autoClickUpgrade = gameData.autoClickUpgrade;
+            }
+
+            btnController.AttackUpdateText(gameData.attackUpgrade, gameData.damage);
+            btnController.CriticalUpdateText(gameData.criticalUpgrade, gameData.critical);
+            btnController.AutoClickUpdateText(gameData.autoClickUpgrade, gameData.autoClickTime);
+            stage.UpdateUI(gameData.stage, gameData.curentMonsterNumber, gameData.gold);
         }
         else
         {
@@ -105,7 +124,7 @@ public class GameManager : MonoBehaviour
 
     void SaveGame()
     {
-        SaveLoadManager.Instance.UpdateGameData(0, 1, 0, 1, 1, 0);
+        SaveLoadManager.Instance.UpdateGameData(50, 50, 50, 0, 1, 0, 1, 1, 0);
         SaveLoadManager.Instance.SaveAsJson();
     }
 }
