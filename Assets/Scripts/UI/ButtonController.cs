@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ButtonController : MonoBehaviour
     [SerializeField] TextMeshProUGUI attackText;
     [SerializeField] TextMeshProUGUI criticalText;
     [SerializeField] TextMeshProUGUI autoClickTimeText;
+    [SerializeField] GameObject buyPopUp;
+    [SerializeField] Text buyText;
 
     public int attackUpgrade = 50;
     public int criticalUpgrade = 50;
@@ -32,11 +35,14 @@ public class ButtonController : MonoBehaviour
             attackUpgrade *= 2;
             AttackUpdateText(attackUpgrade, GameManager.Instance.Player.controller.damage);
             SaveGame();
-            // TODO : 구매 완료 팝업
+
+            buyPopUp.SetActive(true);
+            buyText.text = "업그레이드 완료";
         }
         else
         {
-            // TODO : 골드 부족 팝업
+            buyPopUp.SetActive(true);
+            buyText.text = "돈이 부족합니다.";
         }
     }
 
@@ -49,11 +55,14 @@ public class ButtonController : MonoBehaviour
             criticalUpgrade *= 4;
             CriticalUpdateText(criticalUpgrade, GameManager.Instance.Player.controller.critical);
             SaveGame();
-            // TODO : 구매 완료 팝업
+
+            buyPopUp.SetActive(true);
+            buyText.text = "업그레이드 완료";
         }
         else
         {
-            // TODO : 골드 부족 팝업
+            buyPopUp.SetActive(true);
+            buyText.text = "돈이 부족합니다.";
         }
     }
 
@@ -66,11 +75,14 @@ public class ButtonController : MonoBehaviour
             autoClickUpgrade *= 3;
             AutoClickUpdateText(autoClickUpgrade, GameManager.Instance.Player.controller.autoClickTime);
             SaveGame();
-            // TODO : 구매 완료 팝업
+
+            buyPopUp.SetActive(true);
+            buyText.text = "업그레이드 완료";
         }
         else
         {
-            // TODO : 골드 부족 팝업
+            buyPopUp.SetActive(true);
+            buyText.text = "돈이 부족합니다.";
         }
     }
 
@@ -108,5 +120,10 @@ public class ButtonController : MonoBehaviour
         SaveLoadManager.Instance.PlayerGameData(GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
         SaveLoadManager.Instance.ShopGameData(attackUpgrade, criticalUpgrade, autoClickUpgrade);
         SaveLoadManager.Instance.SaveAsJson();
+    }
+
+    public void ExitPopUp()
+    {
+        buyPopUp.SetActive(false);
     }
 }

@@ -36,10 +36,21 @@ public class PlayerController : MonoBehaviour
        
         if (Physics2D.Raycast(mousePos, Vector2.zero, 0f, layerMask))
         {
-            //TODO: 추후 애니메이션과 특정 행동 추가 예정
+            EventBus.Publish("");
             Debug.Log("클릭클릭");
             animator.SetTrigger("Attack");
-            GameManager.Instance.Monster.monsterController.TakeDamage(damage);
+
+            int rndValue = UnityEngine.Random.Range(0, 100);
+            
+            if (rndValue < critical)
+            {
+                GameManager.Instance.Monster.monsterController.TakeDamage(damage * 2);
+            }
+            else
+            {
+                GameManager.Instance.Monster.monsterController.TakeDamage(damage);
+            }
+            
         }
     }
 
