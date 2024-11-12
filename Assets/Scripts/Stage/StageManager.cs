@@ -34,7 +34,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         MonsterSpawn();
-        //MapSpawn();
+        MapSpawn();
     }
 
     void MonsterSpawn()
@@ -51,7 +51,8 @@ public class StageManager : MonoBehaviour
     {
         int rndMapIndex = Random.Range(0, maps.Length);
         rndMap = maps[rndMapIndex];
-        GameObject go = Instantiate(rndMap);
+        GameObject go = Instantiate(rndMap, gameObject.transform);
+        go.name = "Map";
     }
 
     void Init()
@@ -79,10 +80,13 @@ public class StageManager : MonoBehaviour
         {
             stage++;
             stageText.text = $"Stage : {stage.ToString()}";
+            DestroyMap();
+            MapSpawn();
             MonsterSpawn();
             Init();
             goldText.text = $"Gold : {gold.ToString()}";
             monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
+
         }
         SaveGame();
     }
@@ -103,5 +107,16 @@ public class StageManager : MonoBehaviour
         stageText.text = $"Stage : {stageNum.ToString()}";
         monsterNumberText.text = $"{monsterNum} / {maxMonsterNumber}";
         goldText.text = $"Gold : {goldNum.ToString()}G";
+    }
+
+    void DestroyMap()
+    {
+        foreach(Transform child in gameObject.transform)
+        {
+            if(child.gameObject.name == "Map")
+            {
+                Destroy(child.gameObject);
+            }
+        }
     }
 }
