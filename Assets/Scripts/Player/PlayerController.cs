@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.Instance.Monster.monsterController.TakeDamage(damage);
             }
-            
+        }
+        else
+        {
+            Debug.Log("dd");
         }
     }
 

@@ -69,7 +69,7 @@ public class SaveLoadManager : MonoBehaviour
             }
         }
 
-        savePath = Path.Combine(Application.persistentDataPath, "savedata.dat");
+        savePath = Path.Combine(Application.persistentDataPath, "Newsavedata.dat");
         gameData = new GameData();
     }
 

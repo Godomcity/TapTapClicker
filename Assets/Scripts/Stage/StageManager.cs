@@ -10,6 +10,10 @@ public class StageManager : MonoBehaviour
     public MonsterData[] monsters;
     public MonsterData monsterData;
     private GameObject rndMonster;
+
+    public GameObject[] maps;
+    private GameObject rndMap;
+
     private int maxMonsterNumber = 10;
     public int curentMonsterNumber;
     public int stage;
@@ -30,6 +34,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         MonsterSpawn();
+        //MapSpawn();
     }
 
     void MonsterSpawn()
@@ -40,6 +45,13 @@ public class StageManager : MonoBehaviour
 
         GameObject go = Instantiate(rndMonster, GameManager.Instance.Monster.transform);
         GameManager.Instance.Monster.monsterController = go.GetComponent<MonsterController>();
+    }
+
+    void MapSpawn()
+    {
+        int rndMapIndex = Random.Range(0, maps.Length);
+        rndMap = maps[rndMapIndex];
+        GameObject go = Instantiate(rndMap);
     }
 
     void Init()
