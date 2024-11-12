@@ -67,4 +67,45 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
+    private void Start()
+    {
+        LoadGame();
+    }
+
+    void LoadGame()
+    {
+        GameData gameData = SaveLoadManager.Instance.LoadAsJson();
+        if (gameData != null)
+        {
+            if (player != null)
+            {
+                player.controller.damage = gameData.damage;
+                player.controller.critical = gameData.critical;
+                player.controller.autoClickTime = gameData.autoClickTime;
+            }
+            else if (stage != null)
+            {
+                stage.curentMonsterNumber = gameData.curentMonsterNumber;
+                stage.gold = gameData.gold;
+                stage.stage = gameData.stage;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("저장된 데이터가 없습니다. 새 게임을 시작합니다.");
+            StartNewGame();
+        }
+    }
+
+    private void StartNewGame()
+    {
+        SaveGame();
+    }
+
+    void SaveGame()
+    {
+        SaveLoadManager.Instance.UpdateGameData(0, 1, 0, 1, 1, 0);
+        SaveLoadManager.Instance.SaveAsJson();
+    }
 }

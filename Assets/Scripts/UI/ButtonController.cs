@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class ButtonController : MonoBehaviour
@@ -31,6 +32,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Player.controller.damage *= 2;
             attackUpgrade *= 2;
             AttackUpdateText();
+            SaveGame();
             // TODO : 구매 완료 팝업
         }
         else
@@ -47,6 +49,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Player.controller.critical += 0.1f;
             criticalUpgrade *= 4;
             CriticalUpdateText();
+            SaveGame();
             // TODO : 구매 완료 팝업
         }
         else
@@ -63,6 +66,7 @@ public class ButtonController : MonoBehaviour
             GameManager.Instance.Player.controller.autoClickTime -= 0.1f;
             autoClickUpgrade *= 3;
             AutoClickUpdateText();
+            SaveGame();
             // TODO : 구매 완료 팝업
         }
         else
@@ -98,5 +102,11 @@ public class ButtonController : MonoBehaviour
         autoClickTimeButtonText.text = $"{autoClickUpgrade}G";
         autoClickTimeText.text = $"AutoClickTime : {GameManager.Instance.Player.controller.autoClickTime.ToString("N1")}s → {autotTime.ToString("N1")}s";
         GameManager.Instance.useGold?.Invoke();
+    }
+
+    void SaveGame()
+    {
+        SaveLoadManager.Instance.UpdateGameData(GameManager.Instance.Stage.curentMonsterNumber, GameManager.Instance.Stage.stage, GameManager.Instance.Stage.gold, GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
+        SaveLoadManager.Instance.SaveAsJson();
     }
 }

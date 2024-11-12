@@ -2280,6 +2280,8 @@ MonoBehaviour:
   monsters:
   - {fileID: 11400000, guid: 2b59fd34bcf5df24194b9df9247e3617, type: 2}
   monsterData: {fileID: 0}
+  curentMonsterNumber: 0
+  stage: 1
   gold: 500
   stageText: {fileID: 1956791676}
   monsterNumberText: {fileID: 1501106436}
@@ -2654,12 +2656,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7a79ddf9082ea43ba9803824b9241b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
   autoClickTime: 1
   damage: 1
   critical: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1956791672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2846,6 +2848,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!1 &2081992213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2081992215}
+  - component: {fileID: 2081992214}
+  m_Layer: 0
+  m_Name: SaveLoadManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2081992214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081992213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f28f50d398c9194459dcb64f10982c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  savePath: 
+--- !u!4 &2081992215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081992213}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -433.8413, y: 377.77402, z: -9.705209}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092302362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,3 +3319,4 @@ SceneRoots:
   - {fileID: 5282865661524451737}
   - {fileID: 1921858739}
   - {fileID: 1727758349}
+  - {fileID: 2081992215}

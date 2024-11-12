@@ -10,10 +10,11 @@ public class StageManager : MonoBehaviour
     public MonsterData[] monsters;
     public MonsterData monsterData;
     private GameObject rndMonster;
-    private int curentMonsterNumber;
     private int maxMonsterNumber = 10;
-    private int stage = 1;
-    public int gold = 500;
+    public int curentMonsterNumber;
+    public int stage;
+    public int gold;
+
 
     [SerializeField] TextMeshProUGUI stageText;
     [SerializeField] TextMeshProUGUI monsterNumberText;
@@ -57,7 +58,7 @@ public class StageManager : MonoBehaviour
 
     void AddMonsterNumber()
     {
-        if(curentMonsterNumber <= maxMonsterNumber - 1)
+        if (curentMonsterNumber <= maxMonsterNumber - 1)
         {
             GameManager.Instance.Monster.monsterController = null;
             curentMonsterNumber++;
@@ -74,10 +75,18 @@ public class StageManager : MonoBehaviour
             goldText.text = $"Gold : {gold.ToString()}";
             monsterNumberText.text = $"{curentMonsterNumber} / {maxMonsterNumber}";
         }
+        SaveGame();
     }
 
     void UpdateGold()
     {
         goldText.text = $"Gold : {gold.ToString()}G";
     }
+
+    void SaveGame()
+    {
+        SaveLoadManager.Instance.UpdateGameData(curentMonsterNumber, stage, gold, GameManager.Instance.Player.controller.autoClickTime, GameManager.Instance.Player.controller.damage, GameManager.Instance.Player.controller.critical);
+        SaveLoadManager.Instance.SaveAsJson();
+    }
+
 }

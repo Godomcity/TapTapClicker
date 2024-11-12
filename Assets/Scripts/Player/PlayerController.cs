@@ -12,12 +12,10 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Coroutine coroutine;
 
-    public LayerMask layerMask;
-
     public float autoClickTime = 1;
     public int damage = 1;
     public float critical = 0;
-
+    public LayerMask layerMask;
 
     private void Awake()
     {
