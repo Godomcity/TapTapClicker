@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using static UnityEngine.ParticleSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public int damage = 1;
     public float critical = 0;
     public LayerMask layerMask;
+    public GameObject particleObj;
+    private ParticleSystem particle;
 
     bool autoAttack = false;
 
@@ -41,7 +44,10 @@ public class PlayerController : MonoBehaviour
             {
                 EventBus.Publish("Sword");
                 animator.SetTrigger("Attack");
-
+                GameObject go = Instantiate(particleObj);
+                particle = go.GetComponent<ParticleSystem>();
+                particle.Play();
+                go.transform.position = mousePos;
                 int rndValue = UnityEngine.Random.Range(0, 100);
 
                 if (rndValue < critical)
@@ -52,6 +58,7 @@ public class PlayerController : MonoBehaviour
                 {
                     GameManager.Instance.Monster.monsterController.TakeDamage(damage);
                 }
+                Destroy(go, 1f);
             }
        }
         else
