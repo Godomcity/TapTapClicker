@@ -38,10 +38,12 @@ public class ButtonController : MonoBehaviour
 
             buyPopUp.SetActive(true);
             buyText.text = "업그레이드 완료";
+            EventBus.Publish("Upgrade");
         }
         else
         {
             buyPopUp.SetActive(true);
+            EventBus.Publish("NotUpgrade");
             buyText.text = "돈이 부족합니다.";
         }
     }
@@ -57,11 +59,13 @@ public class ButtonController : MonoBehaviour
             SaveGame();
 
             buyPopUp.SetActive(true);
+            EventBus.Publish("Upgrade");
             buyText.text = "업그레이드 완료";
         }
         else
         {
             buyPopUp.SetActive(true);
+            EventBus.Publish("NotUpgrade");
             buyText.text = "돈이 부족합니다.";
         }
     }
@@ -77,11 +81,13 @@ public class ButtonController : MonoBehaviour
             SaveGame();
 
             buyPopUp.SetActive(true);
+            EventBus.Publish("Upgrade");
             buyText.text = "업그레이드 완료";
         }
         else
         {
             buyPopUp.SetActive(true);
+            EventBus.Publish("NotUpgrade");
             buyText.text = "돈이 부족합니다.";
         }
     }

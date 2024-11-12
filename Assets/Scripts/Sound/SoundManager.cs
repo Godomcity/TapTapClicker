@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public enum AudioCategory
 {
@@ -65,13 +64,11 @@ public class SoundManager : MonoBehaviour
             audioClips.Add(audioData.eventName, audioData.clip);
         }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        PlayBGM(currentScene.name);
+        
     }
     void OnEnable()
     {
@@ -92,27 +89,6 @@ public class SoundManager : MonoBehaviour
             {
                 EventBus.Unsubscribe(audioData.eventName, () => PlaySFX(audioData.eventName));
             }
-        }
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        PlayBGM(scene.name);
-    }
-
-    private void PlayBGM(string sceneName)
-    {
-        if (audioClips.TryGetValue(sceneName, out AudioClip bgmClip))
-        {
-            if (bgmSource.clip != bgmClip)
-            {
-                bgmSource.clip = bgmClip;
-                bgmSource.Play();
-            }
-        }
-        else
-        {
-
         }
     }
 

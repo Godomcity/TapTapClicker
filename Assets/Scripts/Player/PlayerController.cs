@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     public float critical = 0;
     public LayerMask layerMask;
 
+    bool autoAttack = false;
+
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -33,15 +35,32 @@ public class PlayerController : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition;
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePosition.x, mousePosition.y, 10f));
-       
-        if (Physics2D.Raycast(mousePos, Vector2.zero, 0f, layerMask))
+       if (!autoAttack)
+       {
+            if (Physics2D.Raycast(mousePos, Vector2.zero, 0f, layerMask))
+            {
+                EventBus.Publish("Sword");
+                animator.SetTrigger("Attack");
+
+                int rndValue = UnityEngine.Random.Range(0, 100);
+
+                if (rndValue < critical)
+                {
+                    GameManager.Instance.Monster.monsterController.TakeDamage(damage * 2);
+                }
+                else
+                {
+                    GameManager.Instance.Monster.monsterController.TakeDamage(damage);
+                }
+            }
+       }
+        else
         {
-            EventBus.Publish("");
-            Debug.Log("클릭클릭");
+            EventBus.Publish("Sword");
             animator.SetTrigger("Attack");
 
             int rndValue = UnityEngine.Random.Range(0, 100);
-            
+
             if (rndValue < critical)
             {
                 GameManager.Instance.Monster.monsterController.TakeDamage(damage * 2);
@@ -51,10 +70,7 @@ public class PlayerController : MonoBehaviour
                 GameManager.Instance.Monster.monsterController.TakeDamage(damage);
             }
         }
-        else
-        {
-            Debug.Log("dd");
-        }
+        
     }
 
     public void OnClick(InputAction.CallbackContext context)
@@ -67,6 +83,8 @@ public class PlayerController : MonoBehaviour
     
     public void AutoAttack()
     {
+        EventBus.Publish("Click");
+        autoAttack = !autoAttack;
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
@@ -75,7 +93,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             coroutine = StartCoroutine(AutoClick());
-        }
+        }    
     }
     
     IEnumerator AutoClick()

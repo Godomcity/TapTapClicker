@@ -1274,11 +1274,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1f2ad53bacc245642854dbdc8ea71a9b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.29
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1372,7 +1372,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87d092d431e3520498ddd75fdd9181be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioDataList: []
+  audioDataList:
+  - eventName: Click
+    category: 1
+    clip: {fileID: 8300000, guid: 7747fdec28a89524c9b0865e274eeeff, type: 3}
+  - eventName: NotUpgrade
+    category: 1
+    clip: {fileID: 8300000, guid: 3ddd5a059f983bc4a924baf99999234d, type: 3}
+  - eventName: Upgrade
+    category: 1
+    clip: {fileID: 8300000, guid: 55e897637d9ace341b0344818c0367be, type: 3}
+  - eventName: Sword
+    category: 1
+    clip: {fileID: 8300000, guid: b188d7c1e5552364987ee12bba99534a, type: 3}
 --- !u!4 &783367342
 Transform:
   m_ObjectHideFlags: 0
@@ -3202,8 +3214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 0.5188679, g: 0.17866677, b: 0.17866677, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
