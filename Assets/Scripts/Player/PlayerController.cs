@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour
     public int damage = 1;
     public float critical = 0;
     public LayerMask layerMask;
-    public GameObject particleObj;
-    private ParticleSystem particle;
+    public Vector3 mousePos;
 
     bool autoAttack = false;
 
@@ -37,17 +36,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mousePosition = Input.mousePosition;
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePosition.x, mousePosition.y, 10f));
-       if (!autoAttack)
-       {
-            if (Physics2D.Raycast(mousePos, Vector2.zero, 0f, layerMask))
+        Vector3 clickMousePos = Camera.main.ScreenToWorldPoint(new Vector3 (mousePosition.x, mousePosition.y, 10f));
+        if (!autoAttack)
+        {
+            if (Physics2D.Raycast(clickMousePos, Vector2.zero, 0f, layerMask))
             {
+                mousePos = clickMousePos;
                 EventBus.Publish("Sword");
                 animator.SetTrigger("Attack");
-                GameObject go = Instantiate(particleObj);
-                particle = go.GetComponent<ParticleSystem>();
-                particle.Play();
-                go.transform.position = mousePos;
+
                 int rndValue = UnityEngine.Random.Range(0, 100);
 
                 if (rndValue < critical)
@@ -58,12 +55,11 @@ public class PlayerController : MonoBehaviour
                 {
                     GameManager.Instance.Monster.monsterController.TakeDamage(damage);
                 }
-                Destroy(go, 1f);
             }
-       }
+        }
         else
         {
-            EventBus.Publish("Sword");
+            EventBus.Publish("AutoSword");
             animator.SetTrigger("Attack");
 
             int rndValue = UnityEngine.Random.Range(0, 100);
